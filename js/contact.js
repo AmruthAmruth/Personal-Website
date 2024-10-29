@@ -1,5 +1,5 @@
 (function() {
-    emailjs.init("FPtps7xmlFCvMJJeZ"); // Replace with your actual EmailJS User ID
+    emailjs.init("FPtps7xmlFCvMJJeZ");
   })();
   
   function sendMail(event) {
@@ -12,7 +12,7 @@
           message: document.getElementById("message").value 
       };
 
-      emailjs.send("service_w6g44jg", "template_3po6u28", params)
+      emailjs.send("service_w6g44jg", "template_3po6u28", params,"FPtps7xmlFCvMJJeZ")
           .then(function(response) {
               alert("Email sent successfully!");
               console.log('Email sent successfully!', response.status, response.text);

@@ -496,6 +496,7 @@
                   name="name"
                   id="name"
                   placeholder="Your Name"
+                  oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
                   required
                 />
               </div>
@@ -679,6 +680,7 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
+
 <script type="text/javascript">
    (function(){
       emailjs.init({
@@ -686,7 +688,6 @@
       });
    })();
 </script>
-
 
 <script>
   (function() {
@@ -696,25 +697,33 @@
   function sendMail(event) {
       event.preventDefault(); 
 
+      let nameField = document.getElementById("name");
+      let emailField = document.getElementById("email");
+      let subjectField = document.getElementById("subject");
+      let messageField = document.getElementById("message");
+
       let params = {
-          name: document.getElementById("name").value,
-          email: document.getElementById("email").value,
-          subject: document.getElementById("subject").value,
-          message: document.getElementById("message").value 
+          name: nameField.value,
+          email: emailField.value,
+          subject: subjectField.value,
+          message: messageField.value 
       };
 
-      emailjs.send("service_w6g44jg", "template_3po6u28", params,"FPtps7xmlFCvMJJeZ")
+      emailjs.send("service_w6g44jg", "template_3po6u28", params, "FPtps7xmlFCvMJJeZ")
           .then(function(response) {
               alert("Email sent successfully!");
               console.log('Email sent successfully!', response.status, response.text);
+
+              nameField.value = "";
+              emailField.value = "";
+              subjectField.value = "";
+              messageField.value = "";
           }, function(error) {
               alert("Failed to send email. Error: " + JSON.stringify(error));
               console.error('Failed to send email. Error: ', error);
           });
   }
 </script>
-
-
 
 
     <script src="js/jquery.min.js"></script>
